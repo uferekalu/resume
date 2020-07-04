@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid fh5co-network">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+            <table class="table table-sm">
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Payment</th>
+                    <th>Balance</th>
+                    <th>Total</th>
+                    <th>Dept</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                    
+                </tr>
+                {% if detail %}
+                {% for data in detail %}
+                <tr>
+                  <td>{{ data.name }}</a></td>
+                  <td> {{data.phone}} </td>
+                  <td> {{data.payment}} </td>
+                  <td> {{data.balance}} </td>
+                  <td> {{data.total}} </td>
+                  <td> {{data.dept}} </td>
+                  <td><a class="btn btn-sm btn-info" href="{% url 'records:update-detail' data.id %}">Update</a></td>
+                  <td><a class="btn btn-sm btn-danger" href="{% url 'records:delete-detail' data.id %}">Delete</a></td>
+                </tr>
+                {% endfor %}
+                {% endif %}
+              </table>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

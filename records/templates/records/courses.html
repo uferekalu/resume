@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid fh5co-network">
+    <div class="container">
+      <div class="row">
+        
+        <div class="col-12">
+            <div class="row mb-2">
+                <div class="col-3"><a href="{% url 'records:details' %}" class="btn btn-warning"> &#8592; Back to Records..</a></div>
+            </div>
+            <table class="table table-sm">
+                <tr>
+                    <th>S/NO</th>
+                    <th>COURSE NAME</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+                {% for course in page_obj %}
+                    <tr>
+                        <td> {{ course.id }} </td>
+                        <td> {{ course.subjects_registered }} </td>
+                        <td><a class="btn btn-sm btn-info" href="{% url 'records:update-course' course.id %}">Update</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'records:delete-course' course.id %}">Delete</a></td>
+                    </tr>
+                {% endfor %} 
+            </table>
+        </div>
+        <div class="container-fluid fh5co-network">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page_obj.has_previous %}
+                            <a href="?{{ page_request_var}}={{ page_obj.previous_page_number }}">previous</a>
+                            {% endif %}
+            
+                            <span class="current">
+                                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                            </span>
+                            {% if page_obj.has_next %}
+                                <a href="?{{ page_request_var }}={{ page_obj.next_page_number }}">next</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
+{% endblock content %}

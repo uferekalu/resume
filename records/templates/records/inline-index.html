@@ -1,0 +1,32 @@
+
+    <div class="card">
+        <div class="card-body">
+            
+            <table class="table table-sm">
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Payment</th>
+                    <th>Balance</th>
+                    <th>Total</th>
+                    <th>Dept</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+                {% if details %}
+                    <tr>
+                        <td><a href="{% url 'records:profile' details.id %}">{{ details.name }}</a> </td>
+                        <td> {{details.phone}} </td>
+                        <td> {{details.payment}} </td>
+                        <td> {{details.balance}} </td>
+                        <td> {{details.total}} </td>
+                        <td> {{details.dept}} </td>
+                        <td><a class="btn btn-sm btn-info" href="{% url 'records:update-detail' details.id %}">Update</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'records:delete-detail' details.id %}">Delete</a></td>
+                    </tr>
+                {% endif %} 
+                
+            </table>
+        </div>
+    </div>
+

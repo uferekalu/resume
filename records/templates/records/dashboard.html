@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .profile-pic{
+        max-width: 200px;
+        min-height: 200px;
+        margin: 0 auto;
+        border-radius: 50%;
+    }
+    
+  h6 {
+    color: white;
+  }
+    
+</style>
+<div id="about-us" class="container-fluid fh5co-about-us pl-0 pr-0 parallax-window" data-parallax="scroll" data-image-src="">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="wow bounceInLeft" data-wow-delay=".25s">WELCOME, {{detail.name}}! <h4><a href="{% url 'records:update-detail' detail.id %}"><i>Update your profile</i></a></h4> </h2>
+            </div>
+        </div>
+        <a href="{% url 'records:details' %}" class="btn btn-warning"> &#8592; Back to Records..</a>
+    <div class="row">
+        <div class="col-4">  
+            
+          <img src="{{ detail.profile_pic.url }}" alt="" class="profile-pic">
+          
+        </div>
+        <div class="col-4">
+            <h5 class="contact"><u>Contact Information:</u></h5>
+                <p>Name: {{detail.name}} </p>
+                <p>Phone: {{detail.phone}} </p>
+                <p>Email: {{detail.email}} </p>
+                <p>Payment: {{detail.payment}} </p>
+                <p>Balance: {{detail.balance}} </p>
+                <p>Total: {{detail.total}} </p>
+                <p>Department: {{detail.dept}} </p>
+                <p>Date Joined: {{detail.date_created}} </p>
+        </div>
+        <div class="col-4">
+            <h5 class="contact"><u>Further Information:</u></h5>
+                <p>School: {{detail.school}} </p>
+                <p>Level: {{detail.level}} </p>
+                <p>Faculty: {{detail.faculty}} </p>
+                <p>Registered courses:
+                    <ul>
+                        {% for detail in detail.courses_registered.all %}
+                        <h6><li>{{detail}}</li></h6>
+                        {% endfor %}
+                    </ul>  
+                </p>
+        </div>
+    </div>
+    
+</div>
+</div>
+
+  
+{% endblock content %}

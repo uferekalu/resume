@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<style>
+    h7 {
+        color: white;
+    }
+</style>
+<div class="col-12 col-md-6 mx-auto">
+  <div class="card">
+      <div class="card-body">
+            <!-- {% if title %}
+              <h5 class="wow bounceInLeft mt-4 mb-4">{{ title }}</h5>
+            {% endif %} -->
+            <div class="row">
+              {% include 'blog/list-inline.html' with blog_post=obj detail=True %}
+            </div>
+            
+            
+            {% if request.user.is_authenticated %}
+              {% if request.user.is_staff %}
+              <div class="row">
+                <div class="col-2">
+                  <a href="{{ obj.get_edit_url }}"><button class="btn btn-primary">Edit</button></a>
+                </div>
+                <div class="col-2">
+                  <a href="{{ obj.get_delete_url }}"><button class="btn btn-danger">Delete</button></a>
+                </div>
+              </div>
+              {% endif %}
+            {% endif %}
+            <hr/>
+            <br/>
+            <div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="5" data-width=""></div>
+        </div>
+      </div>
+
+</div>
+{% endblock content %}
+

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    h7 {
+        color: white;
+    }
+</style>
+<div class="col-12 col-md-6 mx-auto">
+    <div class="card">
+        <div class="card-body">
+            {% if title %}
+                <h5 class="wow bounceInLeft mt-4 mb-4">{{ title }}</h5>
+            {% endif %}
+           <form method="POST" action="">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="submit">
+                <a class="btn btn-info" href="{% url 'blog:blog-list' %}">Back to Blog Post</a>
+           </form>
+        </div>
+      </div>
+</div>
+{% endblock content %}

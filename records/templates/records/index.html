@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Tutorial Accounts{% endblock %}
+{% block content %}
+<div class="col-12 col-md-10 mx-auto">
+    <div class="card">
+        <div class="card-body">
+            {% if request.user %}
+            <h5 class="wow bounceInLeft">Hello, {{request.user|upper}}<a class="hello-msg ml-2" href="{% url 'account_logout' %}">Logout</a></h5>
+            {% endif %}
+            <h5 class="wow bounceInLeft">Total amount = {{total}}</h5>
+            <div class="row">
+                <div class="col-4">
+                    <a href="{% url 'records:add-details' %}" class="btn btn-primary btn-sm btn-block">Add Details
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a href="{% url 'records:add-courses' %}" class="btn btn-primary btn-sm btn-block">Add Courses
+                    </a>
+                </div>
+                <div class="col-4">
+                    <a href="{% url 'records:courses' %}" class="btn btn-primary btn-sm btn-block">View Available Courses
+                    </a>
+                </div>
+            </div>
+            
+            <h5 class="wow bounceInLeft mt-4">DETAILS===>>> (ME={{mech}},EE={{elect}},CE={{civil}},AE={{agric}},CHE={{chem}},
+                CS={{comp_sci}},CTE={{comp_engr}},SLT={{sci_lab}},FST={{food_sci}},PT={{pharm_tech}},DOP={{dispensary}})
+            </h5>
+            <table class="table table-sm">
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Payment</th>
+                    <th>Balance</th>
+                    <th>Total</th>
+                    <th>Dept</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                </tr>
+                {% for detail in page_obj %}
+                    <tr>
+                        <td><a style="color: yellow;" href="{% url 'records:profile' detail.id %}">{{ detail.name }}</a> </td>
+                        <td> {{detail.phone}} </td>
+                        <td> {{detail.payment}} </td>
+                        <td> {{detail.balance}} </td>
+                        <td> {{detail.total}} </td>
+                        <td> {{detail.dept}} </td>
+                        <td><a class="btn btn-sm btn-info" href="{% url 'records:update-detail' detail.id %}">Update</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'records:delete-detail' detail.id %}">Delete</a></td>
+                    </tr>
+                {% endfor %} 
+                
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-12 col-md-10 mx-auto">
+    <div class="card">
+        <div class="card-body">
+            <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                    <a href="?{{ page_request_var}}={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+    
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+                    {% if page_obj.has_next %}
+                        <a href="?{{ page_request_var }}={{ page_obj.next_page_number }}">next</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

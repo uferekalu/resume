@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head_title %}Blog{% endblock %}
+{% block content %}
+
+<div class="row">
+    <div class="col-12 col-md-5 mb-3 mx-auto">
+        {% for object in object_list %}
+            {% include 'blog/list-inline.html' with blog_post=object truncate=True detail=False %}
+        {% endfor %}
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if object_list.has_previous %}
+                <a href="?{{ page_request_var}}={{ object_list.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ object_list.number }} of {{ object_list.paginator.num_pages }}.
+                </span>
+                {% if object_list.has_next %}
+                    <a href="?{{ page_request_var }}={{ object_list.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    </div> 
+</div>
+                
+      
+{% endblock content %}

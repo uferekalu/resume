@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid fh5co-network">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+            <h5 class="wow bounceInLeft mt-4">LOGIN</h5>
+            <form method="POST" action="" class="form">
+                {% csrf_token %}
+                <div class="row mt-2">
+                    <div class=col-7><input type="text" name="username" placeholder="Username..." class="form-control"></div>
+                </div>               
+                <div class="row mt-2">
+                    <div class=col-7><input type="password" name="password" placeholder="Password..." class="form-control"></div>
+                </div>
+                
+                    <input type="submit" name="Submit" value="Login">
+       
+            </form>
+        </div>
+        <div class="container-fluid fh5co-network">
+            <div class="container">
+              <div class="row">
+                <div class="col-12">
+                    {% for message in messages %}
+                    <h5 class="wow bounceInLeft mt-4">{{message}}</h5>
+                    {% endfor %}
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="container-fluid fh5co-network">
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <h5 class="wow bounceInLeft mt-4">Don't have an account? <a href="{% url 'records:register' %}" class="ml-2">Sign Up</a></h5>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      </div>
+    </div>
+</div>
+{% endblock content %}

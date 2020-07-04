@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}Todo List{% endblock %}
+{% block content %}
+<style>
+    input{
+        width: 100%;
+        padding: 6px 20px;
+        margin: 6px 0;
+        box-sizing: border-box;
+    }
+    input::placeholder {
+        color: #d3d3d3;
+    }
+    .submit {
+        background-color:  #6BA3E8;
+    }
+    .center-column {
+        width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 3px;
+        box-shadow: 6px 2px 30px 0px rgba(0,0,0,0.75);
+    }
+    .item-row{
+        background-color: #906abd;
+        margin: 10px;
+        padding: 20px;
+        border-radius: 3px;
+        color: #fff;
+        font-size: 16px;
+        box-shadow: 0px -1px 10px -4px rgba(0,0,0,0.75);
+    }
+    .btn-danger{
+        background-color: #ffae19;
+        border-color: #e59400;
+    }
+
+</style>
+
+<div class="center-column">
+    <form method="POST" action="{% url 'todo:todolist' %}" class="card-body">
+        {% csrf_token %}
+        <div id="todo" class="row">
+            <div class="col-8">
+                <div class="row">
+                    <div style="color: black;" class="col-2 mt-4">Title:</div>
+                    <div class="col-6 mt-2">{{ form.title }}</div>
+                </div>
+                <div class="row">
+                    <div style="color: black;" class="col-2 mt-4">Complete:</div>
+                    <div class="col-3 mt-3">{{ form.complete }}</div>
+                </div>
+            </div>
+            <div id="addTask" class="col-4">
+                <input style="margin-top: 30px;" class="btn btn-info ml-1 mx-auto" type="submit" name="Create Tasks" value="Add Task" />
+            </div>
+        </div>
+        
+    </form>
+    <h5 class="wow bounceInLeft" style="text-align: center;">{{ title|upper }}</a></h5>
+    <div class="todo-list">
+        {% for task in tasks %}
+        <div class="item-row">
+            
+                <a class="btn btn-sm btn-info" href="{% url 'todo:update_task' task.id %}">Update</a>
+                <a class="btn btn-sm btn-danger" href="{% url 'todo:delete_task' task.id %}">Delete</a>
+                
+                {% if task.complete == True %}
+                <strike style="background-color: black;" >{{ task }}</strike>
+                {% else %}
+                <span>{{ task }}</span>
+                {% endif %}
+            
+        </div>
+        {% endfor %}
+    </div>
+    
+</div>
+
+{% endblock content %}
+
+{% block extra_scripts %}
+<script type="text/javascript">
+    $("document").ready(function() {
+        $("#todo").css({
+            "border-color": "black",
+            "border-width": "2px",
+            "border-style": "solid"
+        });
+        $("#addTask").css({
+            "border-color": "black",
+            "border-width": "2px",
+            "border-style": "solid"
+        });
+    });
+</script>
+{% endblock extra_scripts %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid fh5co-network">
+    <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="row mb-2">
+              <div class="col-3">
+                <a href="{% url 'records:details' %}" class="btn btn-warning"> &#8592; Back to Records..</a>
+            </div>
+            </div>
+            <table class="table table-sm">
+              <tr>
+                  <th>Name</th>
+                  <th>Phone</th>
+                  <th>Payment</th>
+                  <th>Balance</th>
+                  <th>Total</th>
+                  <th>Dept</th>
+                  <th>Update</th>
+                  <th>Remove</th>
+                  
+              </tr>
+              {% if details %}
+              {% for detail in details %}
+              <tr>
+                <td><a href="{% url 'records:details' %}">{{ detail.name }}</a></td>
+                <td> {{detail.phone}} </td>
+                <td> {{detail.payment}} </td>
+                <td> {{detail.balance}} </td>
+                <td> {{detail.total}} </td>
+                <td> {{detail.dept}} </td>
+                <td><a class="btn btn-sm btn-info" href="{% url 'records:update-detail' detail.id %}">Update</a></td>
+                <td><a class="btn btn-sm btn-danger" href="{% url 'records:delete-detail' detail.id %}">Delete</a></td>
+              </tr>
+              {% endfor %}
+              {% endif %}
+            </table>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

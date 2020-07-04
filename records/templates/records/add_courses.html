@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid fh5co-network">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+            <h5 class="wow bounceInLeft mt-4 mb-4">ADD COURSES:</h5>
+            <form method="POST" action="" class="form">
+                {% csrf_token %}
+                <div class="row mb-2">
+                    <div class="col-3"><h5>Name of Student:</h5></div><div class="col-8">{{form.subjects_registered}}</div> 
+                </div>               
+                <div class="row">
+                    <div class="col-3">
+                        <input type="submit" name="Submit" value="Add Courses">
+                    </div>
+                    <div class="col-3">
+                        <a href="{% url 'records:details' %}" class="btn btn-warning"> &#8592; Back to Records..</a>
+                    </div>
+                </div>
+                    
+                   
+            </form>
+        </div>
+        <div class="container-fluid fh5co-network">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 mt--5 errors">
+                {{form.errors}}
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock content %}
+
+

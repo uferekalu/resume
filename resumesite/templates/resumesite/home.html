@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block head_title %}LushakTech{% endblock %}
+{% block content %}
+<style>
+  h1 {
+    text-align: center;
+  }
+</style>
+<div class="row">
+  <div class="col-12 col-md-8 mb-3 mx-auto">
+    <div class="card">
+        <div class="card-body">
+          <h1>{{ site_title }}</h1>
+        </div>
+        
+    </div>
+  </div>
+  <div class="col-12 col-md-4 mb-3 mx-auto">
+    <div class="card">
+        <div class="card-body">
+          <h1>{{ blog_title }}</h1>
+        </div>
+        {% for a in blog_list %}
+          {% include 'blog/list-inline.html' with blog_post=a truncate=True detail=False %}
+        {% endfor %}
+
+        <div class="pagination">
+          <span class="step-links">
+              {% if blog_list.has_previous %}
+              <a href="?{{ page_request_var }}={{ blog_list.previous_page_number }}">previous</a>
+              {% endif %}
+
+              <span class="current">
+                  Page {{ blog_list.number }} of {{ blog_list.paginator.num_pages }}.
+              </span>
+              {% if blog_list.has_next %}
+                  <a href="?{{ page_request_var }}={{ blog_list.next_page_number }}">next</a>
+              {% endif %}
+          </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
+

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    h7 {
+        color: white;
+    }
+</style>
+<div class="col-12 col-md-6 mx-auto">
+  <div class="card">
+      <div class="card-body">
+          <h5 class="wow bounceInLeft mt-4 mb-4">Are you sure you want to delete the following:</h5>
+          <p>{{ obj.title }}</p> 
+          <form method="POST">
+            {% csrf_token %}
+            <button class="btn btn-danger">Yes, delete </button>
+            <a class="btn btn-info" href="{% url 'blog:blog-list' %}">Cancel</a>
+          </form>
+        </div>
+      </div>
+    
+</div>
+{% endblock content %}
