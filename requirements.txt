@@ -35,7 +35,7 @@ l18n==2018.5
 lxml==4.5.0
 markdown2==2.3.9
 oauthlib==3.1.0
-Pillow==7.1.2
+Pillow==8.2.0
 psycopg2==2.8.4
 py-moneyed==0.8.0
 pycparser==2.20
